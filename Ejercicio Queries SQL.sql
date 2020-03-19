@@ -19,23 +19,30 @@ ON flights.Origin = airports.City
 Group BY city, colYear, colMonth
 
 --5)
-Select UniqueCarrier, colYear, colMonth, Cancelled
+Select UniqueCarrier, colYear, colMonth, SUM(Cancelled)
 from flights 
-Order by Cancelled DESC
+GROUP BY UniqueCarrier
+Order by SUM(Cancelled) DESC
+
 
 --6)
-Select Tailnum, Distance
+Select Tailnum, SUM(Distance)
 from flights
 Group by Tailnum
-Order by Distance DESC
+Order by SUM(Distance) DESC
 LIMIT 10
 
 --7)
 Select UniqueCarrier, AVG(ArrDelay)
 from flights
-Group by UniqueCarrier
-order by avg(ArrDelay) DESC 
-LIMIT 9
+GROUP BY UniqueCarrier
+HAVING AVG(ArrDelay) > 10
+ORDER BY AVG(ArrDelay) DESC
+
+
+
+
+
 
 
 
